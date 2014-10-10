@@ -1,0 +1,9 @@
+server {
+  listen 80;
+  server_name www.example.com;
+  root /var/www/www.example.com;
+  include /etc/nginx/conf.d/php.conf.inc;
+  #include /etc/nginx/conf.d/php-to-index.conf.inc
+  access_log /var/log/nginx/www.example.com-access.log main;
+  error_log /var/log/nginx/www.example.com-error.log;
+}
