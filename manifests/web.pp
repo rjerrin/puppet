@@ -12,26 +12,19 @@ class webserver::php {
 }
 
 class webserver::testsite { 
-	apache::vhost { 'slave.test.net' :
+	apache::vhost { 'slave.test.net non-ssl' :
+	servername => 'slave.test.net',
 	port => '80',
 	docroot => '/var/www/new',
-        directoryindex => ['index.html index.htm index.php'],
-	directories => [
-		    {
-        path => '/var/www/new',
-        options => ['Indexes', 'FollowSymLinks', 'MultiViews'],
-        allow_override => [ 'None' ],
-        order => 'Allow,Deny',
+	 rewrites   => [
+    {
+      comment      => 'redirect non-SSL traffic to SSL site',
+      rewrite_cond => ['%{HTTPS} off'],
+      rewrite_rule => ['(.*) https://%{HTTPS_HOST}%{REQUEST_URI}'],
+    }
+  ]
 }
-]
 }
-	file { "/var/www/new/index.php" :
-		ensure => present,
-		content => "<?php phpinfo();?>",
-	}
-
-}
-
 
 
 	
