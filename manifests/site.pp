@@ -17,3 +17,15 @@ include postfix
 
 
 }
+
+
+node 'master.test.net' {
+
+   package { 'apache2' :
+	ensure => purged,
+}
+
+
+
+}
+
