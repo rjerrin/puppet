@@ -6,9 +6,10 @@ class mysql::config ($port = $::mysql::params::service_port  ) inherits ::mysql:
   }
 
   file  { 'conffile' :
-  name   => $::mysql::params::confg_file,
-  ensure => 'present',
-  content  =>  template('mysql/my.cnf.erb')
+  name    => $::mysql::params::confg_file,
+  ensure  => 'present',
+  notify  => Class['mysql::service'],
+  content => template('mysql/my.cnf.erb')
   }
 
 
