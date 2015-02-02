@@ -1,4 +1,4 @@
-class mysql::config () inherits ::mysql::params
+class mysql::config ($port = $::mysql::params::service_port  ) inherits ::mysql::params
 {
   file { 'confdir':
     name   => $::mysql::params::conf_dir,
@@ -8,7 +8,7 @@ class mysql::config () inherits ::mysql::params
   file  { 'conffile' :
   name   => $::mysql::params::confg_file,
   ensure => 'present',
-  source =>  'puppet:///modules/mysql/my.cnf'
+  content  =>  template('mysql/my.cnf.erb')
   }
 
 

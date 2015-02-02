@@ -1,6 +1,6 @@
 class mysql::params {
   $conf_dir = '/etc/mysql/conf.d'
-  $confg_file = '/etc/mysql/conf.d/my.cnf'
+  $confg_file = '/etc/mysql/my.cnf'
   $daemon_user = 'mysql'
   $service_name = 'mysql'
   $package_name = 'mysql-server'

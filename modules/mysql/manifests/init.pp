@@ -35,9 +35,15 @@
 #
 # Copyright 2015 Your name here, unless otherwise noted.
 #
-class mysql {
+class mysql ( 
+$port = $::mysql::params::service_port, 
+) inherits ::mysql::params  {
 include mysql::install
-include mysql::config 
+
+class { ::mysql::config: 
+  port => $port
+}
+
 include mysql::service
 
 Class['mysql::install'] -> Class['mysql::config'] -> Class ['mysql::service']
